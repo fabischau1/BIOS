@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BIOS Setup Utility</title>
+  <style>
+    /* BIOS-inspired style */
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: monospace;
+    }
+    .bios-container {
+      width: 80%;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #333;
+    }
+    .menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .menu li {
+      margin-right: 20px;
+    }
+    .menu a {
+      text-decoration: none;
+      color: #fff;
+    }
+    .menu a:hover {
+      color: #ccc;
+    }
+    .content {
+      padding: 20px;
+    }
+    .tab {
+      display: none;
+    }
+    .tab h2 {
+      margin-top: 0;
+      color: #fff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid #ccc;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      background-color: #333;
+      color: #fff;
+    }
+    th {
+      background-color: #444;
+    }
+    #save-exit, #discard-exit {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #337ab7;
+      color: #fff;
+      cursor: pointer;
+    }
+    #save-exit:hover, #discard-exit:hover {
+      background-color: #23527c;
+    }
+  </style>
+</head>
+<body>
+  <div class="bios-container">
+    <h1>BIOS Setup Utility</h1>
+    <ul class="menu">
+      <li><a href="#main">Main</a></li>
+      <li><a href="#advanced">Advanced</a></li>
+      <li><a href="#security">Security</a></li>
+      <li><a href="#boot">Boot</a></li>
+      <li><a href="#exit">Exit</a></li>
+    </ul>
+    <div class="content">
+      <div id="main" class="tab">
+        <h2>Main</h2>
+        <table>
+          <tr>
+            <td>System Time:</td>
+            <td><input type="text" id="system-time" value="12:00:00 AM"></td>
+          </tr>
+          <tr>
+            <td>System Date:</td>
+            <td><input type="text" id="system-date" value="2023-02-20"></td>
+          </tr>
+        </table>
+      </div>
+      <div id="advanced" class="tab">
+        <h2>Advanced</h2>
+        <table>
+          <tr>
+            <td>CPU Frequency:</td>
+            <td><input type="text" id="cpu-frequency" value="2.4 GHz"></td>
+          </tr>
+          <tr>
+            <td>Memory Timing:</td>
+            <td><input type="text" id="memory-timing" value="CAS Latency: 9"></td>
+          </tr>
+        </table>
+      </div>
+      <div id="security" class="tab">
+        <h2>Security</h2>
+        <table>
+          <tr>
+            <td>Admin Password:</td>
+            <td><input type="password" id="admin-password"></td>
+          </tr>
+          <tr>
+            <td>User Password:</td>
+            <td><input type="password" id="user-password"></td>
+          </tr>
+        </table>
+      </div>
+      <div id="boot" class="tab">
+        <h2>Boot</h2>
+        <table>
+          <tr>
+            <td>Boot Order:</td>
+            <td>
+              <select id="boot-order">
+                <option value="FMOS">FMOS</option>
+                <option value="Windows97">Windows 97</option>
+                <option value="Windows93">Windows 93</option>
+              </select>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div id="exit" class="tab">
+        <h2>Exit</h2>
+        <button id="save-exit">Save & Exit</button>
+        <button id="discard-exit">Discard Changes & Exit</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript code to handle tab switching and button clicks
+    const tabs = document.querySelectorAll('.tab');
+    const menuLinks = document.querySelectorAll('.menu a');
+    const bootOrderSelect = document.getElementById('boot-order');
+    const saveExitButton = document.getElementById('save-exit');
+
+    menuLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const tabId = link.getAttribute('href').substring(1);
+        tabs.forEach((tab) => {
+          tab.style.display = 'none';
+        });
+        document.getElementById(tabId).style.display = 'block';
+      });
+    });
+
+    saveExitButton.addEventListener('click', () => {
+      const bootOrder = bootOrderSelect.value;
+      switch (bootOrder) {
+        case 'FMOS':
+          window.location.href = 'https://fabischau1.github.io/FM_OS/';
+          break;
+        case 'Windows97':
+          window.location.href = 'https://franx1024.github.io/Windows97/';
+          break;
+        case 'Windows93':
+          window.location.href = 'https://www.windows93.net';
+          break;
+      }
+    });
+
+    document.getElementById('discard-exit').addEventListener('click', () => {
+      // Discard changes and exit
+      alert('Changes discarded!');
+    });
+  </script>
+</body>
+</html>
