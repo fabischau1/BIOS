@@ -1,80 +1,179 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BIOS Setup Utility</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* BIOS-inspired style */
+    /* Modern BIOS-inspired style */
     body {
-      background-color: #000;
+      background-color: #121212;
       color: #fff;
-      font-family: monospace;
-    }
-    .bios-container {
-      width: 80%;
-      margin: 40px auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      background-color: #333;
-    }
-    .menu {
-      list-style: none;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
       padding: 0;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
     }
+
+    .bios-container {
+      background-color: #1e1e1e;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 1200px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      color: #00FF00;
+      margin-bottom: 30px;
+    }
+
+    .menu {
+      display: flex;
+      justify-content: space-evenly;
+      list-style: none;
+      padding: 0;
+      margin: 0 0 20px;
+      border-bottom: 2px solid #444;
+    }
+
     .menu li {
-      margin-right: 20px;
+      padding: 10px 20px;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
     }
+
+    .menu li:hover {
+      background-color: #333;
+    }
+
     .menu a {
-      text-decoration: none;
       color: #fff;
+      text-decoration: none;
+      font-weight: bold;
     }
-    .menu a:hover {
-      color: #ccc;
-    }
+
     .content {
-      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
     }
+
     .tab {
       display: none;
     }
+
     .tab h2 {
-      margin-top: 0;
       color: #fff;
+      font-size: 24px;
+      margin-bottom: 20px;
     }
+
     table {
       width: 100%;
-      border-collapse: collapse;
-      border: 1px solid #ccc;
+      border-spacing: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #2d2d2d;
     }
+
     th, td {
-      border: 1px solid #ccc;
-      padding: 10px;
-      background-color: #333;
-      color: #fff;
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #444;
     }
+
     th {
       background-color: #444;
     }
+
+    td {
+      background-color: #333;
+    }
+
+    td input, td select {
+      background-color: #444;
+      color: #fff;
+      border: 1px solid #555;
+      border-radius: 5px;
+      padding: 5px;
+      width: 100%;
+    }
+
+    td input:focus, td select:focus {
+      border-color: #00FF00;
+      outline: none;
+    }
+
     #save-exit, #discard-exit {
-      margin-top: 20px;
       padding: 10px 20px;
       border: none;
-      border-radius: 5px;
-      background-color: #337ab7;
-      color: #fff;
+      border-radius: 8px;
+      background-color: #007bff;
+      color: white;
       cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.3s ease;
     }
+
     #save-exit:hover, #discard-exit:hover {
-      background-color: #23527c;
+      background-color: #0056b3;
+      transform: scale(1.05);
+    }
+
+    #discard-exit {
+      background-color: #d9534f;
+    }
+
+    #discard-exit:hover {
+      background-color: #c9302c;
+    }
+
+    /* Warning Box */
+    .warning-box {
+      background-color: #ff4d4d;
+      color: #fff;
+      border: 2px solid #cc0000;
+      padding: 20px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    /* Transition for Tabs */
+    .tab.fade {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body>
   <div class="bios-container">
     <h1>BIOS Setup Utility</h1>
+
+    <div class="warning-box">
+      <p><strong>Warning:</strong> Any code and JavaScript executed here and every website visited here will affect your FMOS system and may also affect your browser/real system. Proceed with caution.</p>
+    </div>
+
     <ul class="menu">
       <li><a href="#main">Main</a></li>
       <li><a href="#advanced">Advanced</a></li>
@@ -82,8 +181,9 @@
       <li><a href="#boot">Boot</a></li>
       <li><a href="#exit">Exit</a></li>
     </ul>
+
     <div class="content">
-      <div id="main" class="tab">
+      <div id="main" class="tab fade">
         <h2>Main</h2>
         <table>
           <tr>
@@ -96,7 +196,8 @@
           </tr>
         </table>
       </div>
-      <div id="advanced" class="tab">
+
+      <div id="advanced" class="tab fade">
         <h2>Advanced</h2>
         <table>
           <tr>
@@ -109,7 +210,8 @@
           </tr>
         </table>
       </div>
-      <div id="security" class="tab">
+
+      <div id="security" class="tab fade">
         <h2>Security</h2>
         <table>
           <tr>
@@ -122,7 +224,8 @@
           </tr>
         </table>
       </div>
-      <div id="boot" class="tab">
+
+      <div id="boot" class="tab fade">
         <h2>Boot</h2>
         <table>
           <tr>
@@ -130,15 +233,15 @@
             <td>
               <select id="boot-order">
                 <option value="FMOS">FMOS</option>
-                <option value="Windows97">Windows 97</option>
-				<option value="111">FMOS Versions</option>
+                <option value="111">FMOS Versions</option>
                 <option value="FMOSold">FMOS old</option>
               </select>
             </td>
           </tr>
         </table>
       </div>
-      <div id="exit" class="tab">
+
+      <div id="exit" class="tab fade">
         <h2>Exit</h2>
         <button id="save-exit">Save & Exit</button>
         <button id="discard-exit">Discard Changes & Exit</button>
@@ -150,37 +253,36 @@
     // JavaScript code to handle tab switching and button clicks
     const tabs = document.querySelectorAll('.tab');
     const menuLinks = document.querySelectorAll('.menu a');
-    const bootOrderSelect = document.getElementById('boot-order');
-    const saveExitButton = document.getElementById('save-exit');
-
+    
     menuLinks.forEach((link) => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
         const tabId = link.getAttribute('href').substring(1);
+        
         tabs.forEach((tab) => {
           tab.style.display = 'none';
         });
+        
         document.getElementById(tabId).style.display = 'block';
       });
     });
 
-    saveExitButton.addEventListener('click', () => {
-      const bootOrder = bootOrderSelect.value;
+    document.getElementById('save-exit').addEventListener('click', () => {
+      const bootOrder = document.getElementById('boot-order').value;
       switch (bootOrder) {
         case 'FMOS':
           window.location.href = 'https://fabischau1.github.io/FM_OS/';
           break;
-		case '111':
+        case '111':
           window.location.href = 'https://fabischau1.github.io/SelectFMOS/';
           break;
-		case 'FMOSold':
+        case 'FMOSold':
           window.location.href = 'https://fabischau1.github.io/FMOSold/';
           break;
       }
     });
 
     document.getElementById('discard-exit').addEventListener('click', () => {
-      // Discard changes and exit
       alert('Changes discarded!');
     });
   </script>
